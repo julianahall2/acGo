@@ -5,7 +5,6 @@ import "fmt"
 func main() {
 	listaNumeros := []int{1, 2, 3, 4, 5}
 	fmt.Println(acharPair(listaNumeros, 3, 9))
-	fmt.Println("------------------")
 	fmt.Println(acharPair(listaNumeros, 5, 10))
 	fmt.Println(acharPair(listaNumeros, 2, 9))
 	fmt.Println(acharPair(listaNumeros, 3, 4))
