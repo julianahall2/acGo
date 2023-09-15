@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 const M = 5
 
@@ -8,14 +10,13 @@ func main() {
 	var lista [M]int
 	var n = 0
 
-	fmt.Println(busca(lista, 5, 17))
 	insereOrd(&lista, &n, 4)
 	fmt.Println(lista)
 
-	insereOrd(&lista, &n, 12)
+	insereOrd(&lista, &n, 2)
 	fmt.Println(lista)
 
-	insereOrd(&lista, &n, 2)
+	insereOrd(&lista, &n, 12)
 	fmt.Println(lista)
 
 	insereOrd(&lista, &n, 6)
@@ -29,19 +30,32 @@ func main() {
 }
 
 func insereOrd(v *[M]int, n *int, novoValor int) {
-	if *n == 0 {
-
+	if *n >= M {
+		fmt.Println("Overflow")
+	} else {
+		if busca(*v, *n, novoValor) != -1 {
+			i := *n - 1
+			for i >= 0 && v[i] > novoValor {
+				v[i+1] = v[i]
+				i--
+			}
+			v[i+1] = novoValor
+			*n++
+		} else {
+			fmt.Println("Elemento já existe na tabela")
+		}
 	}
 }
 
 func busca(v [M]int, n int, x int) int {
 	i := 0
-	v[n] = x
-	for v[i] < x {
-		i++
-	}
-	if i == n+1 || v[i] != x {
-		return -1
+	for i := 0; i < n; i++ {
+		if v[i] == x {
+			return -1
+		}
+		if v[i] > x {
+			return i
+		}
 	}
 	return i
 }
